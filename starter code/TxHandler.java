@@ -14,7 +14,7 @@ public class TxHandler {
 	 * (2) the signatures on each input of tx are valid, 
 	 * Carlos
 	 * (3) no UTXO is claimed multiple times by tx, 
-	 * Mitch
+	 * Brandon
 	 * (4) all of tx’s output values are non-negative, and
 	 * Danny
 	 * (5) the sum of tx’s input values is greater than or equal to the sum of   
