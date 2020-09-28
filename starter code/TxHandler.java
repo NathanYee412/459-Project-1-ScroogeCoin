@@ -4,7 +4,7 @@ public class TxHandler {
 	 * transaction outputs) is utxoPool. This should make a defensive copy of 
 	 * utxoPool by using the UTXOPool(UTXOPool uPool) constructor.
 	 */
-	UTXOPool poolcopy;
+	private UTXOPool poolcopy;
 	
 	public TxHandler(UTXOPool utxoPool) {
 		// IMPLEMENT THIS
