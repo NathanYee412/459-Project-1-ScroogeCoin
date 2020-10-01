@@ -26,8 +26,12 @@ public class TxHandler {
 	 */
 
 	public boolean isValidTx(Transaction tx) {
-		// IMPLEMENT THIS
-		return false;
+		Transaction.Input in = tx.getInput(i);
+            	UTXO utxo = new UTXO(in.prevTxHash, in.outputIndex);		
+		//check if all outputs are claimed by tx are in teh current UTXO pool
+		if(!poolcopy.contains(utxo)){
+			return false;
+		}
 	}
 
 	/* Handles each epoch by receiving an unordered array of proposed 
