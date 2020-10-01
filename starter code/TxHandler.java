@@ -8,7 +8,7 @@ public class TxHandler {
 	
 	public TxHandler(UTXOPool utxoPool) {
 		// IMPLEMENT THIS
-		poolcopy = new UTXOPool(utxoPool);
+		this.poolcopy = new UTXOPool(utxoPool);
 	}
 
 	/* Returns true if 
