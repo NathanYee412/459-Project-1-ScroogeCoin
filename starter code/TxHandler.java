@@ -26,8 +26,13 @@ public class TxHandler {
 	 */
 
 	public boolean isValidTx(Transaction tx) {
-		Transaction.Input in = tx.getInput(i);
-            	UTXO utxo = new UTXO(in.prevTxHash, in.outputIndex);		
+		//things we need to implement
+		// 1. variables for a new unique utxo
+		// 2. previous transaction output sum
+		// 3. current transaction output sum
+		// 4. for loop to check the 5 conditions above 
+		
+		// for (int i = 0; i < tx.numInputs(); i++) 
 		//check if all outputs are claimed by tx are in teh current UTXO pool
 		if(!poolCopy.contains(utxo)){
 			return false;
