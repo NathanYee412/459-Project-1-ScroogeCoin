@@ -4,11 +4,11 @@ public class TxHandler {
 	 * transaction outputs) is utxoPool. This should make a defensive copy of 
 	 * utxoPool by using the UTXOPool(UTXOPool uPool) constructor.
 	 */
-	private UTXOPool poolcopy;
+	private UTXOPool poolCopy;
 	
 	public TxHandler(UTXOPool utxoPool) {
 		// IMPLEMENT THIS
-		this.poolcopy = new UTXOPool(utxoPool);
+		this.poolCopy = new UTXOPool(utxoPool);
 	}
 
 	/* Returns true if 
@@ -29,7 +29,7 @@ public class TxHandler {
 		Transaction.Input in = tx.getInput(i);
             	UTXO utxo = new UTXO(in.prevTxHash, in.outputIndex);		
 		//check if all outputs are claimed by tx are in teh current UTXO pool
-		if(!poolcopy.contains(utxo)){
+		if(!poolCopy.contains(utxo)){
 			return false;
 		}
 	}
