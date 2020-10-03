@@ -96,18 +96,43 @@ public class TxHandler {
 	 * and updating the current UTXO pool as appropriate.
 	 */
 	public Transaction[] handleTxs(Transaction[] possibleTxs) {
-		
+		//create vector to store valid transactions 
 		Vector<Transaction> valid = new Vector<Transaction>();
 
+		//loop through possible transactions and call updatePool
 		for(int i = 0; i < possibleTxs.length; i++){
 			Transaction handler = possibleTxs[i];
 
+			//check if transaction is valid 
 			if(isValidTx(handler)){
-				valid.add(handler);
 				
-			}
+				//add valid transactions to vector
+				valid.add(handler);
 
+				updatePool(handler);
+			}
 		}
+
+		//create new array of size 
+		Transaction[] validArray = new Transaction[valid.size()];
+		return valid.toArray(validArray);
+	}
+
+
+	//updates the transaction pool
+	public void updatePool(Transaction handler) {
 		
+		for(int j = 0; j < handler.numInputs(); j++){
+			Transaction.Input in = handler.getInput(j);
+			UTXO removeIn = new UTXO(in.prevTxHash, in.outputIndex);
+			poolCopy.removeUTXO(removeIn);
+		}
+
+		for(int k = 0; k < handler.numOutputs(); k++){
+			Transaction.Output out = handler.getOutput(k);
+			UTXO addOut = new UTXO(handler.getHash(), k);
+			poolCopy.addUTXO(addOut, out);
+		}
+	} 
 
 } 
