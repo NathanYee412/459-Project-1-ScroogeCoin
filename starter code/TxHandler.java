@@ -1,3 +1,6 @@
+import java.util.*;
+import java.util.Vector;
+
 public class TxHandler {
 
 	/* Creates a public ledger whose current UTXOPool (collection of unspent 
@@ -27,15 +30,18 @@ public class TxHandler {
 		//greater than or equal to the sum of its output values 
 		double inputValueSum = 0.0;
 		double outputValueSum = 0.0;
+		
 		Vector<UTXO> previousUTXO = new Vector<UTXO>();
+		
 		boolean result = true;
 		
 		//check inputs
 		for(int i = 0; i < tx.numInputs(); i++){
 
-			UTXO utxo = new UTXO(input.prevTxHash, input.outputIndex);
+			
 			//create utxo object to hold current tx values 
 			Transaction.Input input = tx.getInput(i);
+			UTXO utxo = new UTXO(input.prevTxHash, input.outputIndex);
 
 			//RSA Key inputs for verifySignature function 
 			byte[] message = tx.getRawDataToSign(i);
@@ -51,7 +57,7 @@ public class TxHandler {
 
 			//poolCopy.getTxOutput(utxo).address try to short hand using RSA class 
 			//(2) the signatures on each input of tx are valid
-			if(poolCopy.getTxOutput(utxo).address.verifySignature(message, signature)){
+			if(!poolCopy.getTxOutput(utxo).address.verifySignature(message, signature)){
 				return false;
 			}
 			
@@ -90,7 +96,18 @@ public class TxHandler {
 	 * and updating the current UTXO pool as appropriate.
 	 */
 	public Transaction[] handleTxs(Transaction[] possibleTxs) {
-		// IMPLEMENT THIS
+		
+		Vector<Transaction> valid = new Vector<Transaction>();
 
+		for(int i = 0; i < possibleTxs.length; i++){
+			Transaction handler = possibleTxs[i];
+
+			if(isValidTx(handler)){
+				valid.add(handler);
+				
+			}
+
+		}
+		
 
 } 
