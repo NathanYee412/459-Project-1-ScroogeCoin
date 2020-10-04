@@ -43,7 +43,6 @@ public class TxHandler {
 			Transaction.Input input = tx.getInput(i);
 			UTXO utxo = new UTXO(input.prevTxHash, input.outputIndex);
 
-			// RSA Key inputs for verifySignature function 
 			byte[] message = tx.getRawDataToSign(i);
 			byte[] signature = input.signature;
 			
